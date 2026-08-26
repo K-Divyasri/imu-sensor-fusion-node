@@ -1,0 +1,56 @@
+name: imu-sensor-fusion-node ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  firmware-compile-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hardware/16-imu-sensor-fusion-node/build_from_scratch/firmware/imu_node
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install PlatformIO
+        run: pip install platformio
+      - name: Compile the firmware
+        run: pio run
+
+  host-app-build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hardware/16-imu-sensor-fusion-node/build_from_scratch/host
+    steps:
+      - uses: actions/checkout@v4
+      # ubuntu-latest already ships g++ and cmake -- no Docker needed here,
+      # unlike this project's own local verification (see
+      # ../../knowledge/07_cpp_host_app_architecture.md for why Docker was
+      # needed on the machine this project was originally built on).
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release .
+      - name: Build
+        run: cmake --build build -j
+      - name: Run the GoogleTest suite
+        run: ctest --test-dir build --output-on-failure
+
+  sim-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hardware/16-imu-sensor-fusion-node/build_from_scratch/sim
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run the wire-codec + fusion test suite
+        run: python -m pytest -q
