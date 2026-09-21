@@ -4,7 +4,7 @@
 #define PIN_I2C_SDA 21
 #define PIN_I2C_SCL 22
 
-// Sample rate: 200Hz, matching build_from_scratch/sim/imu_sim/synth.py's
+// Sample rate: 200Hz, matching sim/imu_sim/synth.py's
 // default so the same synthetic-motion analysis in the notebooks applies
 // directly to real captured data too.
 #define SAMPLE_RATE_HZ 200

@@ -31,8 +31,8 @@ git branch -M main
 git push -u origin main
 ```
 
-Confirm `build_from_scratch/firmware/imu_node/.gitignore` and
-`build_from_scratch/host/.gitignore` did their jobs — `.pio/`, `build/`,
+Confirm `firmware/imu_node/.gitignore` and
+`host/.gitignore` did their jobs: `.pio/`, `build/`,
 and stray `*.csv`/`*.bin` files shouldn't appear in the repo.
 
 ---
@@ -65,11 +65,11 @@ that's the one thing that has to stay a manual, on-your-own-bench step
 2. Go to [share.streamlit.io](https://share.streamlit.io), sign in with
    GitHub, click **New app**.
 3. Point it at your repo, branch `main`, app file
-   `build_from_scratch/webapp/dashboard_app.py`.
+   `webapp/dashboard_app.py`.
 4. No secrets needed — the app only reads an uploaded CSV or generates
    synthetic data via `imu_sim`, nothing external at all.
 5. Make sure Streamlit Cloud can find the requirements — copy
-   `build_from_scratch/webapp/requirements.txt`'s contents to a
+   `webapp/requirements.txt`'s contents to a
    root-level `requirements.txt`, or point Streamlit Cloud's advanced
    settings at the real path.
 6. Deploy. Click **Generate synthetic session** on the live app to

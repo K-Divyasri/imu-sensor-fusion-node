@@ -1,7 +1,7 @@
 # Before you share either link
 
-- [ ] `build_from_scratch/firmware/imu_node/.pio/` and
-      `build_from_scratch/host/build/` are **not** in the repo.
+- [ ] `firmware/imu_node/.pio/` and
+      `host/build/` are **not** in the repo.
 - [ ] The GitHub Actions badge is green — all three jobs (firmware
       compile, host app build+test, Python tests) passing.
 - [ ] You have a real, recorded `--csv-out` session from an actual bench

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: hardware/16-imu-sensor-fusion-node/build_from_scratch/firmware/imu_node
+        working-directory: firmware/imu_node
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: hardware/16-imu-sensor-fusion-node/build_from_scratch/host
+        working-directory: host
     steps:
       - uses: actions/checkout@v4
       # ubuntu-latest already ships g++ and cmake -- no Docker needed here,
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: hardware/16-imu-sensor-fusion-node/build_from_scratch/sim
+        working-directory: sim
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
